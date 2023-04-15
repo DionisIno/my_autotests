@@ -14,3 +14,15 @@ class TestElements:
             assert email == out_email
             assert current_address == out_current_address
             assert permanent_address == out_permanent_address
+
+    class TestCheckBox:
+        def test_check_box(self, driver):
+            check_box_page = CheckBoxPage(driver, "https://demoqa.com/checkbox")
+            check_box_page.open()
+            check_box_page.open_full_list()
+            check_box_page.click_random()
+            input_checkbox = check_box_page.get_checked_box()
+            output_checkbox = check_box_page.get_output_result()
+            print(input_checkbox)
+            print(output_checkbox)
+            assert input_checkbox == output_checkbox
