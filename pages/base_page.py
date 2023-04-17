@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+import allure
 
 
 
@@ -32,3 +33,7 @@ class BasePage:
 
     def go_to_element(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    @allure.step('Remove footer')
+    def remove_footer(self):
+        self.driver.execute_script("document.querySelector('footer')[0].remove();")
