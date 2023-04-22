@@ -6,7 +6,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from datetime import datetime
 
 
-
 @pytest.fixture(scope="function")
 def driver():
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))

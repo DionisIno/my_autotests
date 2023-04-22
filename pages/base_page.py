@@ -1,7 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
 import allure
-
+from selenium.webdriver import ActionChains
 
 
 class BasePage:
@@ -36,4 +36,16 @@ class BasePage:
 
     @allure.step('Remove footer')
     def remove_footer(self):
-        self.driver.execute_script("document.querySelector('footer')[0].remove();")
+        self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
+
+    @allure.step("Double click")
+    def action_double_click(self, elem):
+        action = ActionChains(self.driver)
+        action.double_click(elem)
+        action.perform()
+
+    @allure.step("Right click")
+    def action_right_click(self, elem):
+        action = ActionChains(self.driver)
+        action.context_click(elem)
+        action.perform()

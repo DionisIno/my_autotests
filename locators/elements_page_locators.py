@@ -13,6 +13,7 @@ class TextBoxPageLocators:
     CREATED_CURRENT_ADDRESS = (By.CSS_SELECTOR, "#output #currentAddress")
     CREATED_PERMANENT_ADDRESS = (By.CSS_SELECTOR, "#output #permanentAddress")
 
+
 class CheckBoxPageLocators:
     EXPAND_BUTTON = (By.CSS_SELECTOR, "button[title='Expand all']")
     ITEM_LIST = (By.CSS_SELECTOR, "span[class='rct-title']")
@@ -20,11 +21,13 @@ class CheckBoxPageLocators:
     TITLE_ITEM = (".//ancestor::span[@class='rct-text']")
     OUTPUT = (By.CSS_SELECTOR, "span[class='text-success']")
 
+
 class RadioButtonPageLocators:
     YES_BUTTON = (By.CSS_SELECTOR, "label[class^='custom'][for='yesRadio']")
     IMPRESSIVE_BUTTON = (By.CSS_SELECTOR, "label[class^='custom'][for='impressiveRadio']")
-    NO_BUTTON= (By.CSS_SELECTOR, "label[class^='custom'][for='noRadio']")
+    NO_BUTTON = (By.CSS_SELECTOR, "label[class^='custom'][for='noRadio']")
     OUTPUT_RESULT = (By.CSS_SELECTOR, "span[class='text-success']")
+
 
 class WebTablePageLocators:
     ADD_BUTTON = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
@@ -46,3 +49,17 @@ class WebTablePageLocators:
 
     # update
     UPDATE_BUTTON = (By.CSS_SELECTOR, 'span[title="Edit"]')
+
+
+class ButtonsPageLocators:
+    DOUBLE_CLICK = (By.CSS_SELECTOR, "button[id='doubleClickBtn']")
+    RIGHT_CLICK = (By.CSS_SELECTOR, "button[id='rightClickBtn']")
+    CLICK_ME_BUTTON = (By.XPATH, "//button[text()='Click Me']")
+
+    SUCCESS_DOUBLE = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
+    SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
+    SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
+
+
+class LinksPageLocators:
+    SIMPLE_LINK = (By.CSS_SELECTOR, "a[id='simpleLink']")
