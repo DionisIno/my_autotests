@@ -1,9 +1,14 @@
 import time
 import requests
+from selenium.common import TimeoutException
+
 from pages.base_page import BasePage
 from locators.elements_page_locators import *
 from generator.generator import *
 import allure
+import base64
+import os
+import random
 
 
 class TextBoxPage(BasePage):
@@ -228,3 +233,72 @@ class LinksPage(BasePage):
         url = self.driver.current_url
         return link_href, url
 
+    def click_on_the_broken_link(self, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            self.element_is_present(self.locators.BAD_REQUEST_LINK).click()
+        else:
+            return response.status_code
+
+    def click_on_the_not_found(self, url):
+        response = requests.get(url)
+        if response.status_code == 200:
+            self.element_is_present(self.locators.BAD_REQUEST_LINK).click()
+        else:
+            return response.status_code
+
+
+class DownloadPage(BasePage):
+    locators = DownLoadPageLocators
+
+    @allure.step('download file')
+    def download_file(self):
+        link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
+        link_b = base64.b64decode(link)
+        path_name_file = rf"D:\Program\PyCharm_program\MyAutotest\my_autotests\test{random.randint(0, 999)}.jpg"
+        with open(path_name_file, 'wb+') as f:
+            offset = link_b.find(b'\xff\xd8')
+            f.write(link_b[offset:])
+            check_file = os.path.exists(path_name_file)
+            f.close()
+        os.remove(path_name_file)
+        return check_file
+
+
+class UploadPage(BasePage):
+    locators = UploadPageLocators
+
+    @allure.step('upload file')
+    def upload_file(self):
+        file_name, path = generated_file()
+        self.element_is_present(self.locators.UPLOAD_FILE).send_keys(path)
+        os.remove(path)
+        text = self.element_is_present(self.locators.UPLOADED_FILE).text
+        return file_name.split("\\")[-1], text.split("\\")[-1]
+
+
+class DynamicPage(BasePage):
+    locators = DynamicPropertiesPageLocators
+
+    @allure.step("check enable button")
+    def check_enable_button(self):
+        try:
+            self.element_is_clicable(self.locators.ENABLE_AFTER_FIVE_SECOND, 5)
+        except TimeoutException:
+            return "Timeout"
+        return True
+
+    @allure.step("check changed of color")
+    def check_changed_of_color(self):
+        color_button = self.element_is_present(self.locators.COLOR_CHANGE_BUTTON)
+        color_button_before = color_button.value_of_css_property("color")
+        time.sleep(6)
+        color_button_after = color_button.value_of_css_property("color")
+        return color_button_before, color_button_after
+
+    def check_appear_button(self):
+        try:
+            self.element_is_visible(self.locators.VISIBLE_AFTER_FIVE_SECOND)
+        except TimeoutException:
+            return "Timeout"
+        return True

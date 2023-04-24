@@ -1,6 +1,6 @@
 import time
 import pytest
-
+from locators.elements_page_locators import *
 from pages.elements_page import *
 
 
@@ -128,6 +128,7 @@ class TestElements:
 
     @allure.feature("Links Page")
     class TestLinksPage:
+
         @allure.title("Check simple link")
         def test_check_simple_link(self, driver):
             links_page = LinksPage(driver, "https://demoqa.com/links")
@@ -141,3 +142,48 @@ class TestElements:
             links_page.open()
             href_link, current_url = links_page.click_on_simple_link_v2()
             assert href_link == current_url, "The link is broken or url is incorrect"
+
+        @allure.title("Check the broken link")
+        def test_broken_link(self, driver):
+            links_page = LinksPage(driver, "https://demoqa.com/links")
+            links_page.open()
+            response_code = links_page.click_on_the_broken_link('https://demoqa.com/bad-request')
+            assert response_code == 400, "The link works or the status code is not 400"
+
+    @allure.feature("Upload and Download page")
+    class TestDownloadAndUploadPage:
+
+        def test_download_file(self, driver):
+            download_page = DownloadPage(driver, "https://demoqa.com/upload-download")
+            download_page.open()
+            check = download_page.download_file()
+            assert check is True
+
+        def test_upload_file(self, driver):
+            upload_file = UploadPage(driver, "https://demoqa.com/upload-download")
+            upload_file.open()
+            file_name, result = upload_file.upload_file()
+            assert file_name == result, "There is not been upload"
+
+    @allure.feature("check dynamic buttons")
+    class TestDynamicButtons:
+        @allure.title("check enable button")
+        def test_enable_button(self, driver):
+            enable_button = DynamicPage(driver, "https://demoqa.com/dynamic-properties")
+            enable_button.open()
+            clickable_button = enable_button.check_enable_button()
+            assert clickable_button is True, "The button is not enable"
+
+        @allure.title("check changed color")
+        def test_check_changed_color(self, driver):
+            color_button = DynamicPage(driver, "https://demoqa.com/dynamic-properties")
+            color_button.open()
+            color_before, color_after = color_button.check_changed_of_color()
+            assert color_after != color_before, "The color is not changed"
+
+        @allure.title("check appear button")
+        def test_appear_button(self, driver):
+            appear_button = DynamicPage(driver, "https://demoqa.com/dynamic-properties")
+            appear_button.open()
+            button = appear_button.check_appear_button()
+            assert button is True, "The button don't appear"
