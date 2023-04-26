@@ -74,7 +74,8 @@ class LinksPageLocators:
                  (By.CSS_SELECTOR, "a[id='forbidden']"),
                  (By.CSS_SELECTOR, "a[id='invalid-url']"),
                  ]
-
+    TEXT_AFTER_CLICK = (By.CSS_SELECTOR, "p[id='linkResponse']")
+    BROKEN_IMAGE = (By.XPATH, "//img[contains(@src, 'Toolsqa_1.jpg')]")
 
 
 class UploadPageLocators:

@@ -1,6 +1,4 @@
-import time
 import pytest
-from locators.elements_page_locators import *
 from pages.elements_page import *
 
 
@@ -128,12 +126,21 @@ class TestElements:
 
     @allure.feature("Links Page")
     class TestLinksPage:
-        lst = [0, 1, 2, 3, 4, 5, 6]
+        links = [(0, "https://demoqa.com/created"),
+                 (1, "https://demoqa.com/no-content"),
+                 (2, "https://demoqa.com/moved"),
+                 (3, "https://demoqa.com/bad-request"),
+                 (4, "https://demoqa.com/unauthorized"),
+                 (5, "https://demoqa.com/forbidden"),
+                 (6, "https://demoqa.com/invalid-url")]
 
-        @pytest.mark.parametrize('item', lst)
-        def check_all_links(self, driver):
+        @pytest.mark.parametrize("item", links)
+        @allure.title("Check all links")
+        def test_check_all_links(self, driver, item):
             link_page = LinksPage(driver, "https://demoqa.com/links")
             link_page.open()
+            text, status_code = link_page.click_on_the_all_links(item)
+            assert status_code in text, "Wrong status code"
 
         @allure.title("Check simple link")
         def test_check_simple_link(self, driver):
@@ -155,6 +162,13 @@ class TestElements:
             links_page.open()
             response_code = links_page.click_on_the_broken_link('https://demoqa.com/bad-request')
             assert response_code == 400, "The link works or the status code is not 400"
+
+        @allure.title("Check the broken image")
+        def test_broken_image(self, driver):
+            links_page = LinksPage(driver, "https://demoqa.com/broken")
+            links_page.open()
+            image = links_page.broken_image()
+            assert image == "The image is broken", "The image is not broken"
 
     @allure.feature("Upload and Download page")
     class TestDownloadAndUploadPage:

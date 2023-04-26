@@ -1,7 +1,8 @@
 import time
+from io import BytesIO
 import requests
 from selenium.common import TimeoutException
-
+from PIL import Image, UnidentifiedImageError
 from pages.base_page import BasePage
 from locators.elements_page_locators import *
 from generator.generator import *
@@ -213,6 +214,7 @@ class ButtonsPage(BasePage):
 class LinksPage(BasePage):
     locators = LinksPageLocators
 
+    @allure.step('check simple link')
     def click_on_simple_link(self):
         simple_link = self.element_is_visible(self.locators.SIMPLE_LINK)
         link_href = simple_link.get_attribute('href')
@@ -225,6 +227,7 @@ class LinksPage(BasePage):
         else:
             return response.status_code
 
+    @allure.step('check simple link v2')
     def click_on_simple_link_v2(self):
         simple_link = self.element_is_visible(self.locators.SIMPLE_LINK)
         link_href = simple_link.get_attribute('href')
@@ -233,6 +236,7 @@ class LinksPage(BasePage):
         url = self.driver.current_url
         return link_href, url
 
+    @allure.step('check broken link')
     def click_on_the_broken_link(self, url):
         response = requests.get(url)
         if response.status_code == 200:
@@ -240,15 +244,23 @@ class LinksPage(BasePage):
         else:
             return response.status_code
 
-    def click_on_the_not_found(self, url):
-        response = requests.get(url)
-        if response.status_code == 200:
-            self.element_is_present(self.locators.BAD_REQUEST_LINK).click()
-        else:
-            return response.status_code
-
+    @allure.step('check all links')
     def click_on_the_all_links(self, item):
-        self.element_is_visible(self.locators.ALL_LINKS[item]).click()
+        self.element_is_visible(self.locators.ALL_LINKS[item[0]]).click()
+        text = self.element_is_visible(self.locators.TEXT_AFTER_CLICK).text
+        response = requests.get(item[1])
+        status_code = str(response.status_code)
+        return text, status_code
+
+    @allure.step('check broken image')
+    def broken_image(self):
+        link = self.element_is_visible(self.locators.BROKEN_IMAGE).get_attribute('src')
+        response = requests.get(link)
+        try:
+            img = Image.open(BytesIO(response.content))
+            return img
+        except UnidentifiedImageError:
+            return "The image is broken"
 
 
 class DownloadPage(BasePage):
