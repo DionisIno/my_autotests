@@ -14,10 +14,10 @@ class TestElements:
             text_box_page.open()
             full_name, email, current_address, permanent_address = text_box_page.fill_all_field()
             out_name, out_email, out_current_address, out_permanent_address = text_box_page.check_filled_field()
-            assert full_name == out_name
-            assert email == out_email
-            assert current_address == out_current_address
-            assert permanent_address == out_permanent_address
+            assert full_name == out_name, "The full name is not correct"
+            assert email == out_email, "The email is not correct"
+            assert current_address == out_current_address, "The current address is not correct"
+            assert permanent_address == out_permanent_address, "The permanent address is not correct"
 
         @allure.title("Get placeholder value")
         def test_get_value_placeholder(self, driver):
@@ -29,7 +29,7 @@ class TestElements:
 
     @allure.feature("Test Check Box")
     class TestCheckBox:
-        @allure.title("Test check box")
+        @allure.title("Test checkbox")
         def test_check_box(self, driver):
             check_box_page = CheckBoxPage(driver, "https://demoqa.com/checkbox")
             check_box_page.open()
@@ -37,7 +37,7 @@ class TestElements:
             check_box_page.click_random()
             input_checkbox = check_box_page.get_checked_box()
             output_checkbox = check_box_page.get_output_result()
-            assert input_checkbox == output_checkbox
+            assert input_checkbox == output_checkbox, "Input text and output checkbox is not equal"
 
     @allure.feature("Test Radio Button")
     class TestRadioButton:
@@ -45,7 +45,7 @@ class TestElements:
         random.shuffle(radio_buttons_list)
 
         @pytest.mark.parametrize('item', radio_buttons_list)
-        @allure.title("Check radio button")
+        @allure.title("Test check radio button")
         def test_radio_button(self, driver, item):
             radio_button_page = RadioButtonPage(driver, "https://demoqa.com/radio-button")
             radio_button_page.open()
@@ -56,7 +56,7 @@ class TestElements:
 
     @allure.feature("Check webtable")
     class TestWebTable:
-        @allure.title("add new person in table")
+        @allure.title("Add new person in table")
         def test_add_person_in_the_table(self, driver):
             web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
@@ -99,8 +99,8 @@ class TestElements:
             web_table_page = WebTablePage(driver, "https://demoqa.com/webtables")
             web_table_page.open()
             count = web_table_page.select_up_to_rows()
-            print(count)
-            # assert count == [5, 10, 20, 25, 50, 100], 'The number of rows in the table has not been changed or has changed incorrectly'
+            assert count == [5, 10, 20, 25, 50,
+                             100], 'The number of rows in the table has not been changed or has changed incorrectly'
 
     @allure.feature("Buttons Page")
     class TestButtonsPage:
@@ -128,6 +128,12 @@ class TestElements:
 
     @allure.feature("Links Page")
     class TestLinksPage:
+        lst = [0, 1, 2, 3, 4, 5, 6]
+
+        @pytest.mark.parametrize('item', lst)
+        def check_all_links(self, driver):
+            link_page = LinksPage(driver, "https://demoqa.com/links")
+            link_page.open()
 
         @allure.title("Check simple link")
         def test_check_simple_link(self, driver):

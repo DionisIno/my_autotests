@@ -66,6 +66,15 @@ class LinksPageLocators:
     BAD_REQUEST_LINK = (By.CSS_SELECTOR, "a[id='bad-request']")
     NOT_FOUND_LINK = (By.CSS_SELECTOR, "a[id='invalid-url']")
     FORBIDDEN_LINK = (By.CSS_SELECTOR, "a[id='forbidden']")
+    ALL_LINKS = [(By.CSS_SELECTOR, "a[id='created']"),
+                 (By.CSS_SELECTOR, "a[id='no-content']"),
+                 (By.CSS_SELECTOR, "a[id='moved']"),
+                 (By.CSS_SELECTOR, "a[id='bad-request']"),
+                 (By.CSS_SELECTOR, "a[id='unauthorized']"),
+                 (By.CSS_SELECTOR, "a[id='forbidden']"),
+                 (By.CSS_SELECTOR, "a[id='invalid-url']"),
+                 ]
+
 
 
 class UploadPageLocators:

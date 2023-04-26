@@ -174,11 +174,11 @@ class WebTablePage(BasePage):
         self.remove_footer()
         count = [5, 10, 20, 25, 50, 100]
         data = []
-        for i in count:
+        for x in count:
             count_row_button = self.element_is_present(self.locators.COUNT_ROW_LIST)
             self.go_to_element(count_row_button)
             count_row_button.click()
-            self.element_is_visible(By.CSS_SELECTOR, f'option[value="{i}"]').click()
+            self.element_is_visible(By.CSS_SELECTOR, f'option[value="{x}"]').click()
             data.append(self.check_count_rows())
         return data
 
@@ -247,6 +247,9 @@ class LinksPage(BasePage):
         else:
             return response.status_code
 
+    def click_on_the_all_links(self, item):
+        self.element_is_visible(self.locators.ALL_LINKS[item]).click()
+
 
 class DownloadPage(BasePage):
     locators = DownLoadPageLocators
@@ -255,7 +258,7 @@ class DownloadPage(BasePage):
     def download_file(self):
         link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
         link_b = base64.b64decode(link)
-        path_name_file = rf"D:\Program\PyCharm_program\MyAutotest\my_autotests\test{random.randint(0, 999)}.jpg"
+        path_name_file = rf"../test{random.randint(0, 999)}.jpg"
         with open(path_name_file, 'wb+') as f:
             offset = link_b.find(b'\xff\xd8')
             f.write(link_b[offset:])
