@@ -274,7 +274,8 @@ class UploadPage(BasePage):
     @allure.step('upload file')
     def upload_file(self):
         file_name, path = generated_file()
-        self.element_is_present(self.locators.UPLOAD_FILE).send_keys(path)
+        file_name1 = self.element_is_present(self.locators.UPLOAD_FILE)
+        file_name1.send_keys(path)
         os.remove(path)
         text = self.element_is_present(self.locators.UPLOADED_FILE).text
         return file_name.split("\\")[-1], text.split("\\")[-1]

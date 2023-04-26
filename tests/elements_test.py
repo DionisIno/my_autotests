@@ -166,8 +166,6 @@ class TestElements:
             assert check is True
 
         def test_upload_file(self, driver):
-            """Поменял абсолютный путь на относительный для сохранения файла,
-            тест начал падать, нужно будет доработать"""
             upload_file = UploadPage(driver, "https://demoqa.com/upload-download")
             upload_file.open()
             file_name, result = upload_file.upload_file()

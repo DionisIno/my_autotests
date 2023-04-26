@@ -21,7 +21,7 @@ def get_person():
 
 
 def generated_file():
-    path = rf"../test{random.randint(0, 999)}.txt"
+    path = rf"D:\Program\PyCharm_program\MyAutotest\my_autotests\test{random.randint(0, 999)}.txt"
     with open(path, 'w+') as f:
         f.write(f"""Hello World{random.randint(0, 999)}""")
         f.close()
