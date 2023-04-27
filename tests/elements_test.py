@@ -2,7 +2,7 @@ import pytest
 from pages.elements_page import *
 
 
-@allure.suite("Main test")
+@allure.suite("Text Box")
 class TestElements:
     @allure.feature("Testing Text Box")
     class TestTextBox:
@@ -172,13 +172,14 @@ class TestElements:
 
     @allure.feature("Upload and Download page")
     class TestDownloadAndUploadPage:
-
+        @allure.title("Check the download file")
         def test_download_file(self, driver):
             download_page = DownloadPage(driver, "https://demoqa.com/upload-download")
             download_page.open()
             check = download_page.download_file()
             assert check is True
 
+        @allure.title("Check the upload file")
         def test_upload_file(self, driver):
             upload_file = UploadPage(driver, "https://demoqa.com/upload-download")
             upload_file.open()
