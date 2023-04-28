@@ -1,6 +1,6 @@
 from faker import Faker
 import random
-from data.data import Person
+from data.data import *
 
 faker_ru = Faker('ru_RU')
 Faker.seed()
@@ -48,3 +48,10 @@ def generated_city():
         "Rajasthan": ["Jaipur", "Jaiselmer", ]
     }
     return random_list, city[random_list]
+
+
+def generator_color():
+    yield Color(
+        color_name=["Red", "Blue", "Yellow", "Purple", "White", "Violet",
+                    "Indigo", "Black", "Magenta", "Aqua", "Green"]
+    )
