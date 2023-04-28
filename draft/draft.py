@@ -1,22 +1,22 @@
 def return_correct_form(data):
-    text = []
+    text1 = []
     second = data.split('\n')[1:]
     for i in second:
         if "Name" in i:
             a = i.split()[2:]
-            text.append(a)
+            text1.append(a)
         elif "Email" in i:
             a = i.split()[2:]
-            text.append(a)
+            text1.append(a)
         elif "Gender" in i:
             a = i.split()[1:]
-            text.append(a)
+            text1.append(a)
         elif "Date" in i:
             a = i.replace(',', ' ').split()[3:]
-            text.append(a)
+            text1.append(a)
         elif "Mobile" in i:
             a = i.split()[1:]
-            text.append(a)
+            text1.append(a)
         elif "Subjects" in i:
             b = i.split(',')
             qw = []
@@ -25,20 +25,20 @@ def return_correct_form(data):
                     qw.append(*b[j].split()[1:])
                 else:
                     qw.append(b[j].strip())
-            text.append(qw)
+            text1.append(qw)
         elif "Hobbies" in i:
             a = i.split()[1:]
-            text.append(a)
+            text1.append(a)
         elif "Picture" in i:
             a = i.split()[1:]
-            text.append(a)
+            text1.append(a)
         elif "Picture" in i:
             a = i.split()[1:]
-            text.append(a)
+            text1.append(a)
         elif "Address" in i:
             a = [' '.join(i.split()[1:])]
-            text.append(a)
+            text1.append(a)
         elif "State" in i:
             a = i.split()[3:]
-            text.append(a)
-    return text
+            text1.append(a)
+    return text1
