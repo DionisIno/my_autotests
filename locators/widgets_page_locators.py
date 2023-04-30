@@ -14,5 +14,16 @@ class AccordianPageLocators:
 
 
 class AutoCompletePageLocators:
-    MULTI_COLOR = (By.CSS_SELECTOR, "div[id='autoCompleteMultipleContainer']")
-    ONE_COLOR= (By.CSS_SELECTOR, "div[id='autoCompleteSingleContainer']")
+    MULTI_COLOR = (By.CSS_SELECTOR, "input[id='autoCompleteMultipleInput']")
+    MULTI_COLOR_VALUE = (By.CSS_SELECTOR, "div[class$='auto-complete__multi-value']")
+    REMOVE_ALL_COLORS = (By.XPATH, "//div[contains(@class, 'auto-complete__clear-indicator')]")
+    GET_COLOR_NAME = (By.CSS_SELECTOR, "div[class$='auto-complete__multi-value__label']")
+    REMOVE_ONE_COLOR = (By.CSS_SELECTOR, "div[class$='auto-complete__multi-value__remove']")
+
+    # SINGLE_COLOR_NAME = (By.CSS_SELECTOR, "div[id='autoCompleteSingleContainer']")
+    SINGLE_COLOR_NAME = (By.CSS_SELECTOR, "div[class^='auto-complete__single-value']")
+    SINGLE_COLOR_INPUT = (By.CSS_SELECTOR, "input[id='autoCompleteSingleInput']")
+
+
+class DatePicker:
+    SELECT_DATE = (By.CSS_SELECTOR, "input[id='datePickerMonthYearInput']")

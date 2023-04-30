@@ -1,6 +1,5 @@
 import time
 
-import pytest
 from pages.form_page import *
 
 

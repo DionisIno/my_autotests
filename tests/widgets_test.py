@@ -1,6 +1,5 @@
-import random
-import pytest
 
+import pytest
 from pages.widgets_page import *
 
 
@@ -33,3 +32,31 @@ class TestWidgets:
         def test_multi_colors(self, driver):
             color_page = AutoCompletePage(driver, "https://demoqa.com/auto-complete")
             color_page.open()
+            input_colors = color_page.fill_input_multi()
+            output_color = color_page.check_colors_in_field()
+            assert input_colors == output_color, "Input data does not match output"
+
+        @allure.title("Check remove all colors")
+        def test_remove_all_color(self, driver):
+            color_page = AutoCompletePage(driver, "https://demoqa.com/auto-complete")
+            color_page.open()
+            input_color = color_page.fill_input_multi()
+            output_color = color_page.remove_all_colors()
+            assert len(input_color) > len(output_color) == 0, "After deleting all elements, the field is not empty"
+
+        @allure.title("Check remove some colors")
+        def test_remove_some_colors(self, driver):
+            color_page = AutoCompletePage(driver, "https://demoqa.com/auto-complete")
+            color_page.open()
+            deleted_colors, all_colors = color_page.remove_some_colors()
+            assert set(deleted_colors).issubset(set(all_colors)) and len(deleted_colors) < len(all_colors), \
+                """The removed colors aren't in the main list, or the length of the removed colors is greater than or 
+                equal to the main list"""
+
+        @allure.title("Fill single color name")
+        def test_check_single_color(self, driver):
+            color_page = AutoCompletePage(driver, "https://demoqa.com/auto-complete")
+            color_page.open()
+            input_color = color_page.fill_single_color_field()
+            output_color = color_page.check_single_color_field()
+            assert input_color == output_color, "Selected color is wrong"

@@ -143,7 +143,7 @@ class FramePage(BasePage):
 class NestedFramesPage(BasePage):
     locators = NestedFramePageLocators
 
-    @allure.title("Check wondow with nested frames")
+    @allure.title("Check window with nested frames")
     def nested_frame_page(self):
         first_frame = self.element_is_present(self.locators.FIRST_FRAME)
         self.driver.switch_to.frame(first_frame)
