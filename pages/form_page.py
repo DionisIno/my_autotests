@@ -83,5 +83,6 @@ class FormPage(BasePage):
         for item in result_list:
             self.go_to_element(item)
             data += item.text
+        print(data)
         correct_result = return_correct_form(data)
         return correct_result

@@ -42,3 +42,17 @@ def return_correct_form(data):
             a = i.split()[3:]
             text1.append(a)
     return text1
+
+
+def convert_to_12h_format(time_24h):
+    time_24h_parts = time_24h.split(':')
+    hour = int(time_24h_parts[0])
+    minute = time_24h_parts[1]
+    am_pm = 'AM'
+    if hour == 0:
+        hour = 12
+    elif hour >= 12:
+        am_pm = 'PM'
+        if hour > 12:
+            hour -= 12
+    return f"{hour}:{minute} {am_pm}"

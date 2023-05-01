@@ -19,5 +19,7 @@ class TestAllForm:
             input_data = [[first_name, last_name], [email], [gender], [mobile], [day.zfill(2), month, year],
                           subject_list, [hobby], [file_name], [address], [state, city]]
             output_data = form_page.form_result()
+            print(input_data)
+            print(output_data)
             result = (input_data == output_data)
             assert result == True, "Incorrect form filling or test error"
