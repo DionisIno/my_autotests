@@ -1,6 +1,8 @@
 import allure
 import pytest
-from pages.widgets_page import *
+import random
+from pages.widgets_page import AccordianPage, AutoCompletePage, DataPickerPage, SliderPage, TabsPage, ProgressBarPage, \
+    ToolTipsPage
 
 
 @allure.suite("Test Widgets Pages")

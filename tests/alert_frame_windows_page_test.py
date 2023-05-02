@@ -1,6 +1,7 @@
+import allure
 import pytest
 
-from pages.alert_frame_windows_page import *
+from pages.alert_frame_windows_page import BrowserWindowsPage, AlertPage, FramePage, ModalPage, NestedFramesPage
 
 
 @allure.suite('Alerts, Frame & Windows')

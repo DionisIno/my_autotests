@@ -1,6 +1,5 @@
-import time
-
-from pages.form_page import *
+import allure
+from pages.form_page import FormPage
 
 
 @allure.suite("Practice Form")

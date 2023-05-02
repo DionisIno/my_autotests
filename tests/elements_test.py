@@ -1,5 +1,8 @@
 import pytest
-from pages.elements_page import *
+import allure
+import random
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage, \
+    DownloadPage, UploadPage, DynamicPage
 
 
 @allure.suite("Text Box")

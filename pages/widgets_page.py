@@ -1,13 +1,14 @@
+import random
 import time
-
+import allure
 from selenium.common import ElementClickInterceptedException
-
-from draft.draft import *
+from draft.draft import convert_to_12h_format
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
-from generator.generator import *
-from locators.widgets_page_locators import *
-from pages.base_page import *
+from generator.generator import generator_color, generator_date
+from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
+from pages.base_page import BasePage
 
 
 class AccordianPage(BasePage):

@@ -3,9 +3,13 @@ from io import BytesIO
 import requests
 from selenium.common import TimeoutException
 from PIL import Image, UnidentifiedImageError
+from selenium.webdriver.common.by import By
+
 from pages.base_page import BasePage
-from locators.elements_page_locators import *
-from generator.generator import *
+from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
+    WebTablePageLocators, ButtonsPageLocators, LinksPageLocators, DownLoadPageLocators, UploadPageLocators, \
+    DynamicPropertiesPageLocators
+from generator.generator import get_person, generated_file
 import allure
 import base64
 import os

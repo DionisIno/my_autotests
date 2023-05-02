@@ -1,10 +1,11 @@
 import random
 import time
+import allure
 from selenium.webdriver import Keys
 import requests
-
-from locators.alert_frame_windows_page_locators import *
-from pages.base_page import *
+from locators.alert_frame_windows_page_locators import BrowserWindowsPageLocators, AlertsPageLocators, \
+    FramePageLocators, NestedFramePageLocators, ModalPageLocators
+from pages.base_page import BasePage
 
 
 class BrowserWindowsPage(BasePage):
