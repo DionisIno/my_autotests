@@ -67,3 +67,17 @@ class ToolTipsPageLocators:
                     "number": (By.XPATH, "//div[@id='texToolTopContainer']/a[contains(text(), '1.10.32')]")
                     }
     AFTER_HOVER_TEXT = (By.CSS_SELECTOR, "div[class='tooltip-inner']")
+
+
+class MenuPageLocators:
+    MENU_LIST = (By.CSS_SELECTOR, "ul[id='nav'] li a")
+
+
+class SelectMenuPageLocators:
+    SELECT_VALUE = (By.CSS_SELECTOR, "div[id='withOptGroup']")
+    SELECT_VALUE_ITEMS = (By.CSS_SELECTOR, " div[tabindex='-1']")
+    SELECT_VALUE_CHECK = (By.CSS_SELECTOR, " div[class$='singleValue']")
+
+    SELECT_ONE = (By.CSS_SELECTOR, "div[id='selectOne']")
+
+    SELECT_OLD_STYLE = (By.CSS_SELECTOR, "select[id='oldSelectMenu']")

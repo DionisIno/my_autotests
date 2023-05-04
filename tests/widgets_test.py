@@ -2,7 +2,7 @@ import allure
 import pytest
 import random
 from pages.widgets_page import AccordianPage, AutoCompletePage, DataPickerPage, SliderPage, TabsPage, ProgressBarPage, \
-    ToolTipsPage
+    ToolTipsPage, MenuPage, SelectMenuPage
 
 
 @allure.suite("Test Widgets Pages")
@@ -130,3 +130,37 @@ class TestWidgets:
             value, input_text = item
             text = tool_tips_page.get_info_after_hover(value)
             assert text == input_text, "'Hover missing or incorrect content'"
+
+    @allure.feature("Test Menu Page")
+    class TestMenu:
+
+        @allure.title("Check menu items")
+        def test_tool_tips(self, driver):
+            menu_page = MenuPage(driver, "https://demoqa.com/menu")
+            menu_page.open()
+            text = menu_page.check_menu()
+            assert text == ['Main Item 1', 'Main Item 2', 'Sub Item', 'Sub Item', 'SUB SUB LIST »', 'Sub Sub Item 1', 'Sub Sub Item 2', 'Main Item 3'], "Menu titles are incorrect"
+
+    @allure.feature("Test Select Menu")
+    class TestSelectMenu:
+        @allure.title("Check select value")
+        def test_select_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver, "https://demoqa.com/select-menu")
+            select_menu_page.open()
+            input_text, output_text = select_menu_page.check_select_value()
+            assert input_text == output_text, "Wrong data"
+
+        @allure.title("Check select one")
+        def test_select_menu(self, driver):
+            select_menu_page = SelectMenuPage(driver, "https://demoqa.com/select-menu")
+            select_menu_page.open()
+            input_text, output_text = select_menu_page.check_select_one()
+            assert input_text == output_text, "Wrong data"
+
+        @allure.title("Check select old style")
+        def test_select_old_style(self, driver):
+            select_menu_page = SelectMenuPage(driver, "https://demoqa.com/select-menu")
+            select_menu_page.open()
+            input_text, output_text = select_menu_page.check_select_old_style()
+            assert input_text == output_text, "Wrong selected value"
+

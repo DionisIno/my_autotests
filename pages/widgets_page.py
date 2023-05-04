@@ -7,7 +7,8 @@ from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
 from generator.generator import generator_color, generator_date
 from locators.widgets_page_locators import AccordianPageLocators, AutoCompletePageLocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipsPageLocators, MenuPageLocators, \
+    SelectMenuPageLocators
 from pages.base_page import BasePage
 
 
@@ -248,8 +249,6 @@ class ProgressBarPage(BasePage):
         time.sleep(random.randint(3, 10))
         button.click()
         value_after = self.element_is_present(self.locators.VALUE_PROGRESS_BAR).get_attribute('aria-valuenow')
-        print(value_after)
-        print(value_before)
         return value_before, value_after
 
 
@@ -289,3 +288,58 @@ class ToolTipsPage(BasePage):
         time.sleep(1)
         text = self.element_is_present(self.locators.AFTER_HOVER_TEXT)
         return text.text
+
+
+class MenuPage(BasePage):
+    locators = MenuPageLocators
+
+    @allure.title("Get menu items")
+    def check_menu(self):
+        menu_list = self.elements_are_present(self.locators.MENU_LIST)
+        data = []
+        for item in menu_list:
+            time.sleep(0.5)
+            self.action_move_to_element(item)
+            data.append(item.text)
+        return data
+
+
+class SelectMenuPage(BasePage):
+    locators = SelectMenuPageLocators
+
+    @allure.title("Get select value")
+    def check_select_value(self):
+        self.element_is_visible(self.locators.SELECT_VALUE).click()
+        text = self.elements_are_present(self.locators.SELECT_VALUE_ITEMS)
+        item = random.choice(text)
+        input_text = item.text
+        item.click()
+        check_text = self.element_is_visible(self.locators.SELECT_VALUE_CHECK).text
+        return input_text, check_text
+
+    @allure.title("Get select one")
+    def check_select_one(self):
+        self.element_is_visible(self.locators.SELECT_ONE).click()
+        text = self.elements_are_present(self.locators.SELECT_VALUE_ITEMS)
+        item = random.choice(text)
+        input_text = item.text
+        item.click()
+        check_text = self.element_is_visible(self.locators.SELECT_VALUE_CHECK).text
+        return input_text, check_text
+
+    def check_select_old_style(self):
+        select_elem = self.element_is_visible(self.locators.SELECT_OLD_STYLE)
+        # Создаем объект класса Select
+        select_list = Select(select_elem)
+        # Получаем список всех элементов списка
+        options = select_list.options
+        # Выбираем случайный элемент из списка
+        random_option = random.choice(options)
+        # Сохраняем текст выбранного элемента в переменную
+        selected_option_text = random_option.text
+        # Кликаем на выбранный элемент
+        random_option.click()
+        time.sleep(2)
+        # Находим выбранный элемент по тексту
+        selected_option = select_list.first_selected_option
+        return selected_option.text, selected_option_text
