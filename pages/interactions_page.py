@@ -72,6 +72,7 @@ class ResizablePage(BasePage):
         elem = self.element_is_visible(self.locators.RESIZABLE).get_attribute('style')
         size_before = self.get_width_and_height(elem)
         self.action_drag_and_drop_by_offset(handle, random.randint(1, 500), random.randint(1, 500))
+        time.sleep(4)
         elem = self.element_is_visible(self.locators.RESIZABLE).get_attribute('style')
         size_after = self.get_width_and_height(elem)
         return size_before, size_after
@@ -114,7 +115,7 @@ class PreventPropogationPage(BasePage):
         return text_after_outer, text_after_inner
 
     @allure.title("Get greedy text")
-    def move_element_inside_field(self):
+    def move_element_inside_field_greedy(self):
         self.element_is_visible(self.locators.PREVENT_TAB).click()
         what = self.element_is_visible(self.locators.DRAG_ME_PREVENT)
         where = self.element_is_visible(self.locators.GREEDY_DROP_BOX)
@@ -147,6 +148,8 @@ class ReverTablePage(BasePage):
         position_before = drag_div.get_attribute('style')
         time.sleep(1)
         position_after = drag_div.get_attribute('style')
+        print(position_before)
+        print(position_after)
         return position_before, position_after
 
 

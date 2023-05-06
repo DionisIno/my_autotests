@@ -78,10 +78,10 @@ class TestInteractions:
             assert text_after_outer == text_after_inner, "Results should be the same"
 
         @allure.title("Check greedy droppable")
-        def test_prevent_page_not_greedy(self, driver):
+        def test_prevent_page_greedy(self, driver):
             prevent_page = PreventPropogationPage(driver, "https://demoqa.com/droppable")
             prevent_page.open()
-            text_after_outer, text_after_inner = prevent_page.move_element_inside_field()
+            text_after_outer, text_after_inner = prevent_page.move_element_inside_field_greedy()
             assert text_after_outer != text_after_inner, "Results shouldn't be the same"
 
     @allure.feature("Test Rever Table")
